@@ -207,6 +207,7 @@ img {
   margin-right: 0.5rem;
   transition: opacity 0.2s ease-in;
   outline: none;
+  
 }
 
 .btn-link {
@@ -218,6 +219,7 @@ img {
 .btn-block {
   display: block;
   width: 100%;
+  
 }
 
 .btn-sm {
@@ -310,6 +312,7 @@ img {
 /* Forms */
 input {
   margin: 1.2rem 0;
+  
 }
 
 .form-text {
@@ -329,6 +332,7 @@ textarea {
   padding: 0.4rem;
   font-size: 1.2rem;
   border: 1px solid #ccc;
+  
 }
 
 input[type='submit'],
