@@ -12,6 +12,7 @@ export class Search extends Component {
   }
   onSubmit= (e) => {
     e.preventDefault();
+    console.log(this.state.text);
     if(this.state.text ===''){
      this.props.setAlert('Please enter something', 'light') 
     }else{
@@ -26,7 +27,7 @@ export class Search extends Component {
     const { showClear, clearUsers } = this.props;
     return (
       <div>
-        <form onSubmit={this.onSubmit} className='form'>
+        <form onSubmit={this.onSubmit.bind(this)} className='form'>
           <input
             type='text'
             name='text'

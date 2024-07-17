@@ -14,7 +14,7 @@ class App extends Component {
     loading: false,
     alert: null
   };
-  // async componentDidMount() {
+  //async componentDidMount() {
     
   //   this.setState({ loading: true });
 
@@ -48,7 +48,7 @@ class App extends Component {
     const {users, loading} = this.state;
     return (
       <div className='App'>
-        <Navbar />
+        <Navbar title="Github Finder" icon="fab fa-github" />
         <div className='container'>
         <Alert alert={this.state.alert}/>
         <Search 
