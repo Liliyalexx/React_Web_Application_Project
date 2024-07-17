@@ -5,6 +5,8 @@ import Search from './components/users/Search';
 import Alert from './components/layout/Alert';
 import axios from 'axios';
 import './App.css';
+import PropTypes from "prop-types";
+
 
 class App extends Component {
   state = {
