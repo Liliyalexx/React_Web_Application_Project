@@ -20,7 +20,7 @@ body {
   font-size: 1rem;
   line-height: 1.6;
   background-color: #fff;
-  color: #333;
+  color: #382b2b;
 }
 
 a {
@@ -29,7 +29,7 @@ a {
 }
 
 a:hover {
-  color: #666;
+  color: #4e4949;
 }
 
 ul {
