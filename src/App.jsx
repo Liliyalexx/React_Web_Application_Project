@@ -10,6 +10,22 @@ import axios from 'axios';
 import './App.css';
 import PropTypes from "prop-types";
 
+// User container component to fetch user data and pass it as prop
+const UserContainer = ({ getUser, user, loading }) => {
+  const { login } = useParams();
+
+  React.useEffect(() => {
+    getUser(login);
+  }, [getUser, login]);
+
+  return <User user={user} loading={loading} />;
+};
+
+UserContainer.propTypes = {
+  getUser: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  loading: PropTypes.bool.isRequired,
+};
 
 class App extends Component {
   state = {
@@ -65,16 +81,16 @@ getUser = async(username)=> {
   
 
   render() {
-    const {users, loading} = this.state;
+    const {users, user,  loading} = this.state;
     return (
       <Router>
-        <div className="App">
-          <Navbar title="Github Finder" icon="fab fa-github" />
-          <div className="container">
+        <div className='App'>
+          <Navbar title='Github Finder' icon='fab fa-github' />
+          <div className='container'>
             <Alert alert={this.state.alert} />
             <Routes>
               <Route
-                path="/"
+                path='/'
                 element={
                   <Fragment>
                     <Search
@@ -87,8 +103,13 @@ getUser = async(username)=> {
                   </Fragment>
                 }
               />
-              <Route path='/about' element= {<About/>}/>
-              <Route path="/user/:login" element={<User />} />
+              <Route path='/about' element={<About />} />
+              <Route
+                path='/user/:login'
+               element={<UserContainer getUser={this.getUser}
+                user={user}
+                loading={loading}
+               />}/>
             </Routes>
           </div>
         </div>
@@ -96,6 +117,7 @@ getUser = async(username)=> {
     );
   }
 }
+
 
 
 

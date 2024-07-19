@@ -1,27 +1,21 @@
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-const User = ({ user }) => {
-  return (
-    <div className="card text-center">
-      <img
-        src={user.avatar_url}
-        alt=""
-        className="round-img"
-        style={{ width: '60px' }}
-      />
-      <h3>{user.login}</h3>
-      <div>
-        <a href={user.html_url} className="btn btn-dark btn-sm my-1">
-          More
-        </a>
-      </div>
-    </div>
-  );
+
+
+export class User extends Component{
+  componentDidMount = () => {
+    this.props.getUser(this.props.match.params.login)
+  }
+  render(){
+    return <div>User</div>
+  }
+  
 };
-
 User.propTypes = {
-  user: PropTypes.object.isRequired,
+  getUser: PropTypes.func.isRequired,
+  match: PropTypes.object.isRequired,
 };
 
 export default User;
