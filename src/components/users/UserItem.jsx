@@ -9,7 +9,7 @@ const UserItem = ({ user: { login, avatar_url, html_url } }) => {
         src={avatar_url}
         alt=''
         className='round-img'
-        style={{ width: '60px' }}
+        style={{ width: '100px' }}
       />
       <h3>{login}</h3>
       <div>
@@ -23,5 +23,6 @@ const UserItem = ({ user: { login, avatar_url, html_url } }) => {
 UserItem.propTypes = {
   user: PropTypes.object.isRequired,
 };
+
 
 export default UserItem;

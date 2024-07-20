@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Spinner from '../layout/Spinner';
+import { Fragment } from 'react';
 
 const User = ({ getUser, user, loading }) => {
   const { login } = useParams(); // Extract the login parameter from the URL
@@ -19,6 +20,7 @@ const User = ({ getUser, user, loading }) => {
 
   const {
     name,
+    company,
     avatar_url,
     location,
     bio,
@@ -38,10 +40,10 @@ const User = ({ getUser, user, loading }) => {
         Back to Search
       </Link>
       Hireable:{' '}
-      {hireable ?(
-        <i className='fas facheck text-success'/>
+      {hireable ? (
+        <i className='fas facheck text-success' />
       ) : (
-        <i className = 'fas fa-times-circle text-danger'/>
+        <i className='fas fa-times-circle text-danger' />
       )}
       <div className='card'>
         <img
@@ -50,9 +52,46 @@ const User = ({ getUser, user, loading }) => {
           className='round-img'
           style={{ width: '150px' }}
         />
+
         <h3>{name}</h3>
         <p>Location: {location}</p>
-        <p>Bio: {bio}</p>
+        <div>
+          {bio && (
+            <Fragment>
+              <h3> Bio</h3>
+              <p>{bio}</p>
+            </Fragment>
+          )}
+          <Link to={html_url} className='btn btn-dark my-1'>
+            Visit GitHub Profile
+          </Link>
+          <ul>
+            <li>
+              {login && (
+                <Fragment>
+                  <strong>Username:</strong>
+                  {login}
+                </Fragment>
+              )}
+            </li>
+            <li>
+              {company && (
+                <Fragment>
+                  <strong>Company:</strong>
+                  {company}
+                </Fragment>
+              )}
+            </li>
+            <li>
+              {blog && (
+                <Fragment>
+                  <strong>Website:</strong>
+                  {blog}
+                </Fragment>
+              )}
+            </li>
+          </ul>
+        </div>
         <p>Blog: {blog}</p>
         <p>Followers: {followers}</p>
         <p>Following: {following}</p>
@@ -64,6 +103,7 @@ const User = ({ getUser, user, loading }) => {
         </a>
       </div>
     </div>
+    
   );
 };
 
