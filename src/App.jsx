@@ -41,15 +41,16 @@ class App extends Component {
   };
 
   //Get single Github user
-  getUser = async username => {
+  getUser = async (username) => {
     this.setState({ loading: true });
 
-    const res =
-      await axios.get(`https://api.github.com/users/${username}?client_id=$
-    {process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=$
-    {process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
-
-    this.setState({ user: res.data.items, loading: false });
+    try {
+      const res = await axios.get(`https://api.github.com/users/${username}`);
+      this.setState({ user: res.data, loading: false });
+    } catch (error) {
+      console.error(error);
+      this.setState({ loading: false });
+    }
   };
 
   // Clear users from state
@@ -88,11 +89,7 @@ class App extends Component {
               <Route
                 path='/user/:login'
                 element={
-                  <User
-                    getUser={this.getUser}
-                    user={user}
-                    loading={loading}
-                  />
+                  <User getUser={this.getUser} user={user} loading={loading} />
                 }
               />
             </Routes>
