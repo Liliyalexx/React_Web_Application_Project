@@ -4,10 +4,15 @@ import PropTypes from 'prop-types';
 import Spinner from '../layout/Spinner';
 
 const User = ({ getUser, user, loading }) => {
-  const { login } = useParams(); // Use the useParams hook to get the route parameters
+  const { login } = useParams(); // Extract the login parameter from the URL
 
   useEffect(() => {
-    getUser(login); // Fetch user data based on the login parameter
+    if (login) {
+      console.log(
+        `Fetching user data from: https://api.github.com/users/${login}`
+      );
+      getUser(login); // Fetch user data based on the login parameter
+    }
   }, [login, getUser]);
 
   if (loading) return <Spinner />;
@@ -32,12 +37,18 @@ const User = ({ getUser, user, loading }) => {
       <Link to='/' className='btn btn-light'>
         Back to Search
       </Link>
+      Hireable:{' '}
+      {hireable ?(
+        <i className='fas facheck text-success'/>
+      ) : (
+        <i className = 'fas fa-times-circle text-danger'/>
+      )}
       <div className='card'>
         <img
           src={avatar_url}
           alt={name}
           className='round-img'
-          style={{ width: '60px' }}
+          style={{ width: '150px' }}
         />
         <h3>{name}</h3>
         <p>Location: {location}</p>
