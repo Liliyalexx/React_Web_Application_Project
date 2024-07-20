@@ -1,20 +1,25 @@
-GitHub User Profile Viewer
+# GitHub User Profile Viewer
+
 This project is a React application that allows users to view GitHub profiles based on a username. It fetches user data from the GitHub API and displays it in a detailed user profile view.
 
-Features
-View User Profile: Displays user information including name, avatar, location, bio, blog, followers, following, public repositories, and public gists.
-Search and Navigate: Navigate back to the search page from the user profile view.
-Loading State: Shows a spinner while data is being fetched.
-Technologies Used
-React: For building the user interface.
-React Router DOM: For routing and navigation.
-Axios: For making HTTP requests to the GitHub API.
-Installation
-Clone the Repository:
+## Features
 
-bash
-Copy code
-git clone https://github.com/your-username/github-user-profile-viewer.git
+- **View User Profile:** Displays user information including name, avatar, location, bio, blog, followers, following, public repositories, and public gists.
+- **Search and Navigate:** Navigate back to the search page from the user profile view.
+- **Loading State:** Shows a spinner while data is being fetched.
+
+## Technologies Used
+
+- **React:** For building the user interface.
+- **React Router DOM:** For routing and navigation.
+- **Axios:** For making HTTP requests to the GitHub API.
+
+## Installation
+
+1. **Clone the Repository:**
+
+   ```bash
+   git clone https://github.com/your-username/github-user-profile-viewer.git
 Navigate to the Project Directory:
 
 bash
