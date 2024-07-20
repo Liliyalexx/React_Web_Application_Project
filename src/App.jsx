@@ -8,80 +8,61 @@ import About from './components/pages/About';
 import User from './components/users/User';
 import axios from 'axios';
 import './App.css';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
-// User container component to fetch user data and pass it as prop
-const UserContainer = ({ getUser, user, loading }) => {
-  const { login } = useParams();
 
-  React.useEffect(() => {
-    getUser(login);
-  }, [getUser, login]);
-
-  return <User user={user} loading={loading} />;
-};
-
-UserContainer.propTypes = {
-  getUser: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired,
-  loading: PropTypes.bool.isRequired,
-};
 
 class App extends Component {
   state = {
     users: [],
-    user:{},
+    user: {},
     loading: false,
-    alert: null
+    alert: null,
   };
   async componentDidMount() {
-    
     this.setState({ loading: true });
 
     const res = await axios.get(`https://api.github.com/users?client_id=$
     {process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=$
     {process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
-
     this.setState({ users: res.data, loading: false });
   }
 
   // Search Githun users
-  searchUsers = async text => {
-    this.setState({ loading:true});
+  searchUsers = async (text) => {
+    this.setState({ loading: true });
 
-    const res = await axios.get(`https://api.github.com/search/users?q=${text}&client_id=$
+    const res =
+      await axios.get(`https://api.github.com/search/users?q=${text}&client_id=$
     {process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=$
     {process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
 
     this.setState({ users: res.data.items, loading: false });
-  }
+  };
 
   //Get single Github user
-getUser = async(username)=> {
-  this.setState({ loading: true});
+  getUser = async username => {
+    this.setState({ loading: true });
 
-    const res = await axios.get(`https://api.github.com/users/${username}?client_id=$
+    const res =
+      await axios.get(`https://api.github.com/users/${username}?client_id=$
     {process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=$
     {process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
 
-    this.setState({ user: res.data, loading: false });
-  }
-
-
-
+    this.setState({ user: res.data.items, loading: false });
+  };
 
   // Clear users from state
-  clearUsers = () => this.setState({users: [], loading:false});
-  
+  clearUsers = () => this.setState({ users: [], loading: false });
+
   // Set Alert
-  setAlert = (msg, type)=>{
-    this.setState({alert:{msg, type}});
-    setTimeout(() => this.setState({alert: null}), 1000)//timer for alert message
-    };
-  
+  setAlert = (msg, type) => {
+    this.setState({ alert: { msg, type } });
+    setTimeout(() => this.setState({ alert: null }), 1000); //timer for alert message
+  };
 
   render() {
-    const {users, user,  loading} = this.state;
+    const { users, user, loading } = this.state;
     return (
       <Router>
         <div className='App'>
@@ -106,10 +87,14 @@ getUser = async(username)=> {
               <Route path='/about' element={<About />} />
               <Route
                 path='/user/:login'
-               element={<UserContainer getUser={this.getUser}
-                user={user}
-                loading={loading}
-               />}/>
+                element={
+                  <User
+                    getUser={this.getUser}
+                    user={user}
+                    loading={loading}
+                  />
+                }
+              />
             </Routes>
           </div>
         </div>
@@ -117,8 +102,5 @@ getUser = async(username)=> {
     );
   }
 }
-
-
-
 
 export default App;
